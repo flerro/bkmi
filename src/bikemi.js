@@ -104,7 +104,10 @@ server.on('request', async (req, res) => {
     }
 });
 
-server.listen(8000, '0.0.0.0', () => {
+let port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+let address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
+server.listen(port, address, () => {
     const address = server.address().address;
     const port = server.address().port;
     console.log(`Running at http://${address}:${port}`);
