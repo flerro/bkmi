@@ -31,5 +31,5 @@ docker run --rm -p 8000:8000 --name bikemi bikemi
 
 Openshift
 ```
-oc new-app openshift/nodejs-010-centos7~https://github.com/flerro/bkmi --name=bikemi
+oc new-app nodejs~https://github.com/flerro/bkmi --name=bikemi
 ```
