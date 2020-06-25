@@ -4,6 +4,7 @@
   "description": "mmi# bikemi-server",
   "main": "bikemi.js",
   "scripts": {
+    "start": "node src/bikemi.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

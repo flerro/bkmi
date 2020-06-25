@@ -104,7 +104,7 @@ server.on('request', async (req, res) => {
     }
 });
 
-let port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+let port = process.env.OPENSHIFT_NODEJS_PORT || 8000
 let address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 server.listen(port, address, () => {
