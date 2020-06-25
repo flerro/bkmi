@@ -1,0 +1,19 @@
+{
+  "name": "bikemi-server",
+  "version": "1.0.0",
+  "description": "mmi# bikemi-server",
+  "main": "bikemi.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flerro/bkmi.git"
+  },
+  "author": "FL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flerro/bkmi/issues"
+  },
+  "homepage": "https://github.com/flerro/bkmi#readme"
+}

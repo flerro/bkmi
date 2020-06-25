@@ -1,5 +1,8 @@
 FROM node:12
 
-COPY bikemi.js server.js
+RUN mkdir -p /app
+WORKDIR /app
+COPY src/bikemi.js bikemi.js
+COPY src/package.json package.json
 EXPOSE 8000
-CMD [ "node", "server.js" ]
+CMD [ "node", "/app/bikemi.js" ]
