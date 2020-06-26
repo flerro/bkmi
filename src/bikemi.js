@@ -94,12 +94,18 @@ const server = http.createServer();
 server.on('request', async (req, res) => {
     try {
         const qs = url.parse(req.url,true).query;
-        console.log(`Bike stations near: (${qs.lat},${qs.lng})`)
-        const stations = await near(qs.lat || 0, qs.lng || 0)      
-        let result = {"count": stations.length, "stations": stations};
-        console.log(`Found #${stations.length} bike stations`)
+        if (!qs || !qs.lat || !qs.lng) {
+            result = {"error": "Missing lat and/or lng params in query string"}
+        } else {
+            console.log(`Bike stations near: (${qs.lat},${qs.lng})`)
+            const stations = await near(qs.lat, qs.lng)      
+            let result = {"count": stations.length, "stations": stations};
+            console.log(`Found #${stations.length} bike stations`)
+        } 
+        
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(result));
+
     } catch (e) {
         res.writeHead(500, {'Content-Type': 'application/json'});
         res.end("{'error': " + e.toString() + "}");
