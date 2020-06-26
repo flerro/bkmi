@@ -88,27 +88,35 @@ const near = async (lat, lng) => {
 // -------------------------------------------- HTTP server
 
 const http = require('http');
-const url = require('url');
 const server = http.createServer();
 
 server.on('request', async (req, res) => {
-    try {
-        const qs = url.parse(req.url,true).query;
-        if (!qs || !qs.lat || !qs.lng) {
-            result = {"error": "Missing lat and/or lng params in query string"}
-        } else {
-            console.log(`Bike stations near: (${qs.lat},${qs.lng})`)
-            const stations = await near(qs.lat, qs.lng)      
-            let result = {"count": stations.length, "stations": stations};
-            console.log(`Found #${stations.length} bike stations`)
-        } 
-        
+    if (req.method == 'GET') {        
         res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify(result));
-
-    } catch (e) {
-        res.writeHead(500, {'Content-Type': 'application/json'});
-        res.end("{'error': " + e.toString() + "}");
+        res.end(JSON.stringify({"message": "alive"}));
+    } else {
+        let body = ''
+        req.on('data', (data) => body += data);
+        req.on('end', async () => {
+            try {
+                const qs = JSON.parse(body);
+                if (!qs.lat || !qs.lng) {
+                    result = {"error": "Missing lat and/or lng"}
+                } else {
+                    console.log(`Bike stations near: (${qs.lat},${qs.lng})`)
+                    const stations = await near(qs.lat, qs.lng)      
+                    result = {"count": stations.length, "stations": stations};
+                    console.log(`Found #${stations.length} bike stations`)
+                } 
+                
+                res.writeHead(200, {'Content-Type': 'application/json'});
+                res.end(JSON.stringify(result));
+        
+            } catch (e) {
+                res.writeHead(500, {'Content-Type': 'application/json'});
+                res.end("{'error': " + e.toString() + "}");
+            }
+        });
     }
 });
 
