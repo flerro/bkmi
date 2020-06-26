@@ -1,6 +1,8 @@
-mmi# bikemi-server
+# bikemi-server
 
-Bike-sharing data as a service in Node.js
+Bike-sharing data as a service in Node.js, for demo purposes 
+
+**DO NOT USE IN PRODUCTION SOFTWARE**
 
 ## Example
 

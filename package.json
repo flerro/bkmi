@@ -1,7 +1,7 @@
 {
   "name": "bikemi-server",
   "version": "1.0.0",
-  "description": "mmi# bikemi-server",
+  "description": "bikemi-server",
   "main": "bikemi.js",
   "scripts": {
     "start": "node src/bikemi.js",
